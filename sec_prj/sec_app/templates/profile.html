@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block main_content %}
+    <h2>Личный кабинет: {{ user.username }}</h2>
+    <h3>Ваши заявки:</h3>
+
+    <p><a href="{% url 'request' %}"><button>Создать новую заявку</button></a></p>
+    
+    {% if requests %}
+        <ul>
+            {% for req in requests %}
+                <li>
+                    <b>{{ req.service.name }}</b> 
+                    (Статус: {{ req.get_status_display }})
+                    <br>
+                    <small>Дата: {{ req.created_at }} | Комментарий: {{ req.comment }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>У вас пока нет заявок. <a href="{% url 'request' %}">Создать заявку</a></p>
+    {% endif %}
+{% endblock %}

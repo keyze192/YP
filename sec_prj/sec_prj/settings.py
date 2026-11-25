@@ -133,4 +133,5 @@ MAILERS = {
 AUTH_USER_MODEL = 'sec_app.MyUser'
 
 LOGIN_REDIRECT_URL = 'main'
+LOGIN_URL = 'login'
 

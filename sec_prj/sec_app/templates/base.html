@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Сервисный центр</title>
 </head>
 <body>
-    {% block main_content %}
-    ЗАЯВКА ОТПРАВЛЕНА
-    {% endblock main_content %}
+    <header>
+        <div>
+            <a href="{% url 'main' %}">Главная</a> | 
+            <a href="{% url 'services' %}">Список услуг</a> |
+            <a href="{% url 'profile' %}">Личный кабинет</a>
+        </div>
+        <div>
+            {% if user.is_authenticated %}
+                Привет, <strong>{{ user.username }}</strong>! 
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Выйти</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Войти</a>
+            {% endif %}
+        </div>
+    </header>
+    
+
+    <main>
+        {% block main_content %}{% endblock main_content %}
+    </main>
 </body>
 </html>
