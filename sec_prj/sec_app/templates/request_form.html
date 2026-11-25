@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+    <h2>Создание заявки</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить заявку</button>
+    </form>
+    
+    <br>
+    <a href="{% url 'main' %}">На главную</a>
+{% endblock main_content %}
